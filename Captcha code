@@ -1,0 +1,31 @@
+import random
+import string
+
+result_str = None
+
+# Generate a random string
+def get_random_string(length):
+    # choose from all lowercase letters
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+
+randomString = get_random_string(5)
+print("Random string: " + randomString)
+
+randomNum = random.randint(10,99)
+
+from captcha.image import ImageCaptcha
+
+# Num of Captchas created
+CapNumInt = 1
+DataForCaptcha = str(CapNumInt) + randomString
+
+# Generate main body of Captcha Image
+image = ImageCaptcha(width = 280, height = 90)
+
+# Data for inside Captcha
+data = image.generate(DataForCaptcha)
+
+# Write data to Captcha
+image.write(DataForCaptcha, 'demo.png')
